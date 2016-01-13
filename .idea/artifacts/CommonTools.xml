@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CommonTools">
+    <output-path>$PROJECT_DIR$/build/CommonTools</output-path>
+    <root id="archive" name="CommonTools.jar">
+      <element id="module-output" name="CommonTools" />
+    </root>
+  </artifact>
+</component>
