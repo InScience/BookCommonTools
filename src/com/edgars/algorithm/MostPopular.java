@@ -66,8 +66,7 @@ public class MostPopular extends Algorithm {
             if (file.exists()) {
                 recommender.loadModel(MODEL_FILE);
             } else {
-                recommender.train();
-                recommender.saveModel(MODEL_FILE);
+                setRecommender(new org.mymedialite.itemrec.UserKNN());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,7 +75,7 @@ public class MostPopular extends Algorithm {
         /**
          * This part of code prints out precisions etc.
          */
-        Collection<Integer> candidate_items = iPosOnlyFeedback.allItems();  // items that will be taken into account in the evaluation
+/*        Collection<Integer> candidate_items = iPosOnlyFeedback.allItems();  // items that will be taken into account in the evaluation
         Collection<Integer> test_users = iPosOnlyFeedback.allUsers();  // users that will be taken into account in the evaluation
 
         try {
@@ -92,7 +91,7 @@ public class MostPopular extends Algorithm {
             System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }
