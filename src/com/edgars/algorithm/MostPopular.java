@@ -25,10 +25,6 @@ public class MostPopular extends Algorithm {
      */
     private static final String MODEL_FILE = System.getProperty("user.dir") + "/models/" + "MostPopularModel.txt";
 
-    public MostPopular() throws SQLException {
-
-    }
-
     /**
      * Constructor if visitor is known.
      *
@@ -43,8 +39,15 @@ public class MostPopular extends Algorithm {
         initializeDataSets();
     }
 
-    public MostPopular(int i) throws SQLException {
-
+    public MostPopular() throws SQLException {
+        setRecommender(new org.mymedialite.itemrec.MostPopular());
+        initializeDataSets();
+        recommender.train();
+        try {
+            recommender.saveModel(MODEL_FILE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void initializeDataSets() {
@@ -65,8 +68,6 @@ public class MostPopular extends Algorithm {
         try {
             if (file.exists()) {
                 recommender.loadModel(MODEL_FILE);
-            } else {
-                setRecommender(new org.mymedialite.itemrec.UserKNN());
             }
         } catch (IOException e) {
             e.printStackTrace();

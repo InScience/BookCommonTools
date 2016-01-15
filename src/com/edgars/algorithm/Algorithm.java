@@ -97,7 +97,6 @@ public class Algorithm {
                 int originalId = resultSet.getInt("ID");
                 candidateList.add(originalId);
             }
-            System.out.println("candidateList" + candidateList); //ok
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {

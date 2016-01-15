@@ -25,7 +25,14 @@ public class UserKNN extends Algorithm {
     private static final String MODEL_FILE = System.getProperty("user.dir") + "/models/" + "UserKNNModel.txt";
 
     public UserKNN() throws SQLException {
-
+        setRecommender(new org.mymedialite.itemrec.UserKNN());
+        initializeDataSets();
+        recommender.train();
+        try {
+            recommender.saveModel(MODEL_FILE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -79,8 +86,6 @@ public class UserKNN extends Algorithm {
         try {
             if (file.exists()) {
                 recommender.loadModel(MODEL_FILE);
-            } else {
-                setRecommender(new org.mymedialite.itemrec.Random());
             }
         } catch (IOException e) {
             e.printStackTrace();
