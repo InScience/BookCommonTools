@@ -263,7 +263,7 @@ public class Algorithm {
                             "VISITOR_LOG AS VL " +
                             "INNER JOIN VISITOR AS V " +
                             "ON VL.MD5_ID = V.MD5_ID " +
-                            "WHERE B.ID IN (SELECT CART FROM VISITOR_LOG)"
+                            "WHERE B.ID IN (SELECT CART FROM VISITOR_LOG) GROUP BY B.ID, V.ID"
             );
             while (resultSet.next()) {
                 String bookId = resultSet.getString("B.ID");
