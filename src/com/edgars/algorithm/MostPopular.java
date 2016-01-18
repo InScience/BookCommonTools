@@ -24,6 +24,7 @@ public class MostPopular extends Algorithm {
      * Path where model file is stored.
      */
     private static final String MODEL_FILE = System.getProperty("user.dir") + "/models/" + "MostPopularModel.txt";
+    private static final String TRAIN_MODEL_FILE = System.getProperty("user.dir") + "/scheduler/models/" + "MostPopularModel.txt";
 
     /**
      * Constructor if visitor is known.
@@ -44,7 +45,7 @@ public class MostPopular extends Algorithm {
         initializeDataSets();
         recommender.train();
         try {
-            recommender.saveModel(MODEL_FILE);
+            recommender.saveModel(TRAIN_MODEL_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }

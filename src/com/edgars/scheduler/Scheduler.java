@@ -5,12 +5,15 @@ import com.edgars.algorithm.MostPopular;
 import com.edgars.algorithm.UserKNN;
 
 import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -19,26 +22,37 @@ public class Scheduler {
     public static void main(String[] args) {
 
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-        Logger logger = Logger.getLogger(Scheduler.class.getSimpleName());
+        String today = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        Logger LOGGER = Logger.getLogger(Scheduler.class.getSimpleName());
         String logPath = FileSystemView.getFileSystemView().getDefaultDirectory() +
-                "/scheduler/log/scheduler.log";
+                "/scheduler/log/scheduler-" + today + ".log";
+
         FileHandler fh;
         try {
-            System.out.println(Scheduler.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        try {
-            fh = new FileHandler(logPath);
-            logger.addHandler(fh);
+            fh = new FileHandler(logPath, true);
+            LOGGER.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
-
+            LOGGER.addHandler(fh);
+            LOGGER.setLevel(Level.ALL);
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
         }
 
-        logger.info(timeStamp + " : " + "Scheduler launched. Calling: " + args[0]);
+        // *************
+
+/*        File file = new File("../../../");
+        String[] directories = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+        System.out.println("DIRECTORIES: " + Arrays.toString(directories));*/
+
+        // *************
+
+        LOGGER.info(timeStamp + " : " + "Scheduler launched. Calling: " + args[0]);
 
         Algorithm algorithm = null;
 
@@ -47,14 +61,14 @@ public class Scheduler {
                 try {
                     algorithm = new MostPopular();
                 } catch (SQLException e) {
-                    logger.info(e.toString());
+                    LOGGER.info(e.toString());
                 }
                 break;
             case "userknn":
                 try {
                     algorithm = new UserKNN();
                 } catch (SQLException e) {
-                    logger.info(e.toString());
+                    LOGGER.info(e.toString());
                 }
                 break;
         }
