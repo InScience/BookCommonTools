@@ -15,7 +15,7 @@ Scheduler
 ---------
 
     * HOW-TO setup cron job:
-        * To check running cron tabs into command line type: crontab -e
+        * To check running cron jobs into command line type: crontab -e
         * Press <i> to start editing
         * Write a job. Example of cron job: 1 0 * * *  ../../../home/edgaras/scheduler/mostpopular.sh
             * Tutorial: http://www.howtogeek.com/101288/how-to-schedule-tasks-on-linux-an-introduction-to-crontab-files/
