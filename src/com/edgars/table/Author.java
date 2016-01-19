@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * Author class works with data about authors.
- * <p/>
+ *
  * Created by Edgars on 09/11/2015.
  * Email: edgars_fjodorovs@inbox.lv
  */

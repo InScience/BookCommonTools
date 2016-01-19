@@ -5,20 +5,25 @@ import com.edgars.algorithm.MostPopular;
 import com.edgars.algorithm.UserKNN;
 
 import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * Class which will be invoked by scheduler to train recommenders.
+ */
 public class Scheduler {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -59,6 +64,5 @@ public class Scheduler {
                 }
                 break;
         }
-
     }
 }

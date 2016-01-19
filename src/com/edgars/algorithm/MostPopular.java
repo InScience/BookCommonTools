@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 /**
  * MostPopular recommender.
- * <p/>
+ *
  * Created by Edgars on 13/11/2015.
  * Email: edgars_fjodorovs@inbox.lv
  */
@@ -74,26 +74,6 @@ public class MostPopular extends Algorithm {
             e.printStackTrace();
         }
 
-        /**
-         * This part of code prints out precisions etc.
-         */
-/*        Collection<Integer> candidate_items = iPosOnlyFeedback.allItems();  // items that will be taken into account in the evaluation
-        Collection<Integer> test_users = iPosOnlyFeedback.allUsers();  // users that will be taken into account in the evaluation
-
-        try {
-            HashMap<String, Double> results = Items.evaluate(recommender, iPosOnlyFeedback, iPosOnlyFeedback, test_users, candidate_items);
-            System.out.println("AUC       " + results.get("AUC"));
-            System.out.println("MAP       " + results.get("MAP"));
-            System.out.println("NDCG      " + results.get("NDCG"));
-            System.out.println("prec@5    " + results.get("prec@5"));
-            System.out.println("prec@10   " + results.get("prec@10"));
-            System.out.println("prec@15   " + results.get("prec@15"));
-            System.out.println("num_users " + results.get("num_users"));
-            System.out.println("num_items " + results.get("num_items"));
-            System.out.println();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
 }

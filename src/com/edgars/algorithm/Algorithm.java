@@ -15,79 +15,78 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Algorithm is main class to work with recommendations.
- * Contains all lists and returns recommendations.
- * <p/>
- * Created by Edgars on 09/11/2015.
- * Email: edgars_fjodorovs@inbox.lv
+ * The type Algorithm.
  */
 public class Algorithm {
 
     /**
-     * IRecommender object from MyMediaLiteJava library.
+     * The Recommender.
      */
     protected org.mymedialite.IRecommender recommender;
 
     /**
-     * List of ignored items.
+     * The Ignore list.
      */
     protected List ignoreList;
 
     /**
-     * List of item attributes.
+     * The Attribute item list.
      */
     protected List attributeItemList;
 
     /**
-     * History of items.
+     * The History item list.
      */
     protected List historyItemList;
 
     /**
-     * List of item ratings.
+     * The Rating item list.
      */
     protected List ratingItemList;
 
     /**
-     * Path to model.
+     * The Model path.
      */
     protected String modelPath;
 
     /**
-     * List of all books original Id's from Hbase.
+     * The Candidate list.
      */
     protected ArrayList<Integer> candidateList;
 
     /**
-     * Visitor's unique id.
+     * The Visitor id.
      */
     protected int visitorId;
 
     /**
-     * Item count to return.
+     * The Count.
      */
     protected int count;
 
     /**
-     * ResultSet is what SELECT returns.
+     * The Result set.
      */
     ResultSet resultSet = null;
 
     /**
-     * Initialize HBaseSQLManager.
+     * The H base sql manager.
      */
     HBaseSQLManager hBaseSQLManager = new HBaseSQLManager();
 
     /**
-     * Mappings..
+     * The User mapping.
      */
     EntityMapping userMapping = new EntityMapping();
+    /**
+     * The Item mapping.
+     */
     EntityMapping itemMapping = new EntityMapping();
 
     /**
-     * Constructor. Filling up candidateList from all records in BOOK_STORE.
+     * Instantiates a new Algorithm.
      *
-     * @throws SQLException
+     * @throws SQLException the sql exception
      */
     public Algorithm() throws SQLException {
         candidateList = new ArrayList<>();
@@ -104,33 +103,31 @@ public class Algorithm {
         }
     }
 
+    /**
+     * Initialize data sets.
+     */
     protected void initializeDataSets() {
 
     }
 
     /**
-     * Method sets recommender type.
+     * Sets recommender.
      *
-     * @param recommender
+     * @param recommender the recommender
      */
     public void setRecommender(org.mymedialite.IRecommender recommender) {
         this.recommender = recommender;
     }
 
     /**
-     * Load MODEL.
+     * Laod visitor model.
      *
-     * @throws IOException
+     * @throws IOException the io exception
      */
     public void laodVisitorModel() throws IOException {
         recommender.loadModel("file");
     }
 
-    /**
-     * Custom comparator to sort list of pairs.
-     *
-     * @return comparator.
-     */
     private Comparator<Pair<Integer, Double>> getComparator() {
 
         Comparator comparator = new Comparator<Pair<Integer, Double>>() {
@@ -146,11 +143,9 @@ public class Algorithm {
     }
 
     /**
-     * Method invokes from Servlet.
-     * Making original ID's to internal, after getting recommendation list,
-     * making them back to original ID's.
+     * Gets recommendation.
      *
-     * @return orderedItems of recommended items.
+     * @return the recommendation
      */
     public List<Pair<Integer, Double>> getRecommendation() {
         ArrayList internalCandidateItemList = new ArrayList();
@@ -186,15 +181,6 @@ public class Algorithm {
         return originalOrderedItemIds;
     }
 
-    /**
-     * Method to get recommendations into a list.
-     *
-     * @param internalVisitorId         internal id of visitor.
-     * @param n                         Count of recommendations to get. If -1 then as much has possible.
-     * @param internalCandidateItemList List of internal items which can be recommended.
-     * @param ignoreList                List of items to not recommend/
-     * @return Returns list of pairs (item id : item score).
-     */
     private List<Pair<Integer, Double>> getRecommendation(int internalVisitorId, int n, ArrayList internalCandidateItemList, List
             ignoreList) {
         if (internalCandidateItemList == null) {
@@ -247,9 +233,9 @@ public class Algorithm {
     }
 
     /**
-     * Reader which gets ID's of visitors with related Book ID's.
+     * Gets reader.
      *
-     * @return bufferedReader.
+     * @return the reader
      */
     public BufferedReader getReader() {
         StringBuilder stringBuilder = new StringBuilder();
