@@ -39,19 +39,6 @@ public class Scheduler {
             e.printStackTrace();
         }
 
-        // *************
-
-/*        File file = new File("../../../");
-        String[] directories = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File current, String name) {
-                return new File(current, name).isDirectory();
-            }
-        });
-        System.out.println("DIRECTORIES: " + Arrays.toString(directories));*/
-
-        // *************
-
         LOGGER.info(timeStamp + " : " + "Scheduler launched. Calling: " + args[0]);
 
         Algorithm algorithm = null;

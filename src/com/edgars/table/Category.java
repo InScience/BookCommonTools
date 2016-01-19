@@ -75,7 +75,6 @@ public class Category extends BookDecorator {
         }
 
         if (categoryId == 0) {
-            System.out.println("if categoryId == 0");
             try {
                 categoryId = hBaseSQLManager.executeSqlGetIdOnUpdate(
                         "UPSERT INTO CATEGORIES(ID, CATEGORY) VALUES(NEXT VALUE FOR CATEGORIES.CATEGORIES_SEQUENCE, '" + category + "')");

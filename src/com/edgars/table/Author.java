@@ -86,7 +86,6 @@ public class Author extends BookDecorator {
         }
 
         if (authorid == 0) {
-            System.out.println("if authorId == 0");
             try {
                 authorid = hBaseSQLManager.executeSqlGetIdOnUpdate(
                         "UPSERT INTO AUTHORS(ID, NAME, SURNAME) VALUES(NEXT VALUE FOR AUTHORS.AUTHORS_SEQUENCE, '" + name + "', '" +
@@ -99,7 +98,6 @@ public class Author extends BookDecorator {
                     surname + "')");
         }
 
-        System.out.println("AUTHOR ID: " + authorid);
         AuthorCategorieLists.AuthorCategoriesIds.setAuthors(authorid);
 
 
