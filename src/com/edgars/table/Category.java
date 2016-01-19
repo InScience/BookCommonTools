@@ -36,6 +36,16 @@ public class Category extends BookDecorator {
     //private JSONObject json = new JSONObject();
 
     /**
+     * This constructor used in case, if no categories were found at book.
+     *
+     * @param table
+     */
+    public Category(Table table) {
+        this.table = table;
+        this.category = null;
+    }
+
+    /**
      * This constructor is used if categories were found, following decorator pattern.
      *
      * @param table Table type object passed to create decorator pattern logic.
