@@ -20,7 +20,7 @@ import java.util.List;
 public class Algorithm {
 
     /**
-     * The Recommender.
+     * The Recommender. From MyMediaLiteJava library.
      */
     protected org.mymedialite.IRecommender recommender;
 
