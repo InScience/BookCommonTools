@@ -10,6 +10,14 @@ Dependencies
     * For Servlet and Parser there are no need for any dependencies. To artifacts just add CommonTools compile output.
     * For Scheduler You will need extracted phoenix client, extracted mymedialitejava and CommonTools compile output.
 
+File locations
+--------------
+
+    * Model files for Algorithms are stored at: /usr/share/tomcat/models
+        Model files are copied from scheduler folder: /home/edgaras/scheduler/models
+        To change locations edit .sh files into scheduler folder.
+
+
 
 Scheduler
 ---------
