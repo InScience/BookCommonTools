@@ -1,0 +1,51 @@
+# file for Nutch 
+# https://wiki.apache.org/nutch/NutchTutorial
+#
+echo "export JAVA_HOME=/usr/"
+export JAVA_HOME=/usr/
+# Bootstrapping from an initial seed list.
+echo "Injecting.."
+bin/nutch inject manoknyga/crawldb urls
+#
+# Generate a fetch list from the database
+echo "Generating.."
+bin/nutch generate manoknyga/crawldb manoknyga/segments -depth 5
+
+#
+# Generates a fetch list for all of the pages due to be fetched
+echo "Generating fetch list"
+s1=`ls -d manoknyga/segments/* | tail -1`
+echo $s1
+#
+# Fetcher on this segment
+echo "Fetching.."
+bin/nutch fetch $s1 -all
+#
+# Parse the entries
+echo "Parsing.."
+bin/nutch parse $s1
+#
+# Update the database with the results of the fetch
+echo "Updating.."
+bin/nutch updatedb manoknyga/crawldb $s1
+
+#
+# Invert all of the links
+echo "Inverting.."
+bin/nutch invertlinks manoknyga/linkdb -dir manoknyga/segments
+
+# solrindexing
+echo "Solr index.."
+bin/nutch solrindex http://158.129.140.188:8983/solr manoknyga/crawldb/ -linkdb manoknyga/linkdb/ manoknyga/segments/* -filter -normalize
+
+# solrdedup
+echo "Solrdedup.."
+bin/nutch solrdedup http://158.129.140.188:8983/solr
+
+# Cleaning solr
+echo "Cleaning solr.."
+bin/nutch solrclean manoknyga/crawldb/ http://158.129.140.188:8983/solr
+
+# Starting crawler
+echo "Crawling.."
+bin/crawl urls manoknyga http://158.129.140.188:8983/solr/ 1
